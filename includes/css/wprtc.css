@@ -2,7 +2,7 @@ rtcVideoContainer { display: block; }
 
 /** MUTE BUTTON **/
 .rtcVideoContainer .mute { 
-	color: #FFF;
+	color: #056a21;
 	cursor: pointer;
 	display: block;
 	font-size: 30px;
