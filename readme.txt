@@ -1,5 +1,5 @@
 === WebRTC Video streaming for WP ===
-Contributors: guavaworks
+Contributors: guavaworks, michalbluma
 Donate link: http://www.codingofficehours.com/coh/#/teacher/23
 Tags: webrtc, video, video chat, webcam
 Requires at least: 3.9
