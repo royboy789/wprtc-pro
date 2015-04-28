@@ -13,18 +13,22 @@ require_once('includes/licensing.php');
 require_once('includes/shortcode.php');
 
 
-define('WordPressWebRTC', '1.1.1'); 
+define('WordPressWebRTC', '2.0'); 
 
 class WordPressWebRTC {
 	function WordPressWebRTC(){
 		global $wpdb;
 	
-		add_shortcode( 'wpRTC', 'webRTCsc' );
-		add_action( 'admin_menu', 'wprtc_menu' );
+		$this->__init();
+	}
+	
+	function __init() {
+		new pluginLicense();
+		new wprtc_shortcode();
+		new wprtc_setting();
+		
 		add_action( 'admin_enqueue_scripts', array( $this, 'adminSettings' ) );
 		add_action('wp_enqueue_scripts' , array( $this, 'wprtcCSS' ) );
-
-		new pluginLicense();
 	}
 
 	function adminSettings( $hook_suffix ) {

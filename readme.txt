@@ -1,11 +1,11 @@
 === WebRTC Video streaming for WP ===
-Contributors: guavaworks, michalbluma
-Donate link: http://www.codingofficehours.com/coh/#/teacher/23
-Tags: webrtc, video, video chat, webcam
-Requires at least: 3.9
-Tested up to: 3.9.1
-Stable tag: 0.1
-License: GPLv2 or later
+Contributors: guavaworks, michalbluma, michaelbeil
+Donate link: http://www.codecavalry.com
+Tags: webrtc, video, video chat, webcam, streaming video
+Requires at least: 4.2
+Tested up to: 4.2
+Stable tag: 2.0
+License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 WebRTC for WordPress allows you to easily create a video chat room utilizing webRTC, and is supported by most latest versions of modern browsers.
@@ -35,3 +35,6 @@ Install the plugin and use the simple shortcode [wpRTC room_name="room"] to crea
 
 = 0.1 =
 * Shortcode and initial build
+
+= 2.0 =
+* New WebRTC engine / library
