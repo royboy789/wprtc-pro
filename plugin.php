@@ -1,11 +1,14 @@
 <?php
 /**
- * Plugin Name: wpRTC Pro - WebRTC for WordPress
- * Description: This plugin will allow you to easily create peer-to-peer video using shortcode, as users enter the page they will enter the video chat
- * Version: 1.1.1
- * Author: Roy Sivan
- * Author URI: http://www.roysivan.com
- * License: GPL2
+ * Plugin Name:				wpRTC Pro - WebRTC for WordPress
+ * Plugin URI:				https://wordpress.org/plugins/wprtc-real-time-video-for-wp/
+ * Description:				This plugin will allow you to easily create peer-to-peer video chats
+ * Version:						1.1.1
+ * Author:						Roy Sivan
+ * Author URI:				http://roysivan.com
+ * Text Domain:				wprtc
+ * License:						GPL-2.0+
+ * License URI:				http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
 require_once('includes/settings.php');
@@ -13,12 +16,12 @@ require_once('includes/licensing.php');
 require_once('includes/shortcode.php');
 
 
-define('WordPressWebRTC', '1.1.1'); 
+define('WordPressWebRTC', '1.1.1');
 
 class WordPressWebRTC {
 	function WordPressWebRTC(){
 		global $wpdb;
-	
+
 		add_shortcode( 'wpRTC', 'webRTCsc' );
 		add_action( 'admin_menu', 'wprtc_menu' );
 		add_action( 'admin_enqueue_scripts', array( $this, 'adminSettings' ) );
@@ -35,7 +38,7 @@ class WordPressWebRTC {
 	    wp_enqueue_style('tab-ui', plugin_dir_url( __FILE__ ).'includes/css/jquery-ui-1.10.4.custom.min.css', null, false);
 	    wp_enqueue_style('wpRTCcss', plugin_dir_url( __FILE__ ).'includes/css/wprtc.css', null, false);
 	}
-	
+
 	function wprtcCSS(){
 		wp_enqueue_style('wpRTCcss', plugin_dir_url( __FILE__ ).'includes/css/wprtc.css', null, false);
 	}
