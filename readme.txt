@@ -6,7 +6,7 @@ Requires at least: 4.2
 Tested up to: 4.2
 Stable tag: 2.0
 License: GPLv3 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License URI: http://www.gnu.org/licenses/gpl.html
 
 WebRTC for WordPress allows you to easily create a video chat room utilizing webRTC, and is supported by most latest versions of modern browsers.
 
@@ -33,8 +33,8 @@ If you have the plugin installed and have tried using the shortcode and only see
 
 == Changelog ==
 
-= 0.1 =
-* Shortcode and initial build
-
 = 2.0 =
 * New WebRTC engine / library
+
+= 0.1 =
+* Shortcode and initial build
