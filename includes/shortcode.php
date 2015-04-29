@@ -4,13 +4,13 @@
 class wprtc_shortcode {
 	
 	function __construct() {
-		add_shortcode( array( $this ), 'webRTCsc' );
+		add_shortcode( 'wpRTC', array( $this, 'webRTCsc' ) );
 	}
 
 	function webRTCscripts() {
 		// Simple WebRTC Core
-		wp_enqueue_script('simple-core', 'http://simplewebrtc.com/latest.js', array('jquery'), null, false);
-		wp_enqueue_script('wpRTC', plugin_dir_url( __FILE__ ).'js/wpRTC.js', array('simple-core'), null, false);
+		wp_enqueue_script('icecomm-core', plugin_dir_url( __FILE__ ).'assets/js/icecomm.js', array('jquery'), null, false);
+		wp_enqueue_script('wpRTC', plugin_dir_url( __FILE__ ).'assets/js/wpRTC.js', array('icecomm-core'), null, false);
 		
 		// FONT AWEOMSE
 		wp_enqueue_style('fontAwesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css', null, false);
@@ -77,7 +77,7 @@ class wprtc_shortcode {
 			echo '<p>'.$rtcOptions['private_msg'].'</p>';
 			return ob_get_clean();
 		} else {
-			webRTCscripts();
+			$this->webRTCscripts();
 		}
 		$maxCap = '';
 		if( intval($a['max_capacity']) > 0 ) { $maxCap = 'data-capacity="'.$a['max_capacity'].'"';}
@@ -95,7 +95,7 @@ class wprtc_shortcode {
 		echo $inlineStyle;
 		if($a['room_title'] !== '') { echo '<h2 class="videoTitle">'.$a['room_title'].'</h2>'; }
 		echo '<div class="rtcVideoContainer '.$rtcOptions['rtcClass'].'">';
-			echo '<div class="largeVideo"><video data-room="'.$roomName.'" data-maxCap="'.$a['max_capacity'].'" class="rtcVideoPlayer" id="localVideo" oncontextmenu="return false;" '.$maxCap.'></video></div>';
+			echo '<div class="largeVideo"><video autoplay data-room="'.$roomName.'" data-maxCap="'.$a['max_capacity'].'" class="rtcVideoPlayer" id="localVideo" oncontextmenu="return false;" '.$maxCap.'></video></div>';
 			if(isset($select)) { echo $select; }
 			echo '<div id="remoteVideos"></div>';
 		echo '</div>';

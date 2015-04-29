@@ -1,0 +1,24 @@
+{
+  "name": "wprtc",
+  "version": "2.0.0",
+  "description": "=== WebRTC Video streaming for WP ===\r Contributors: guavaworks, michalbluma, michaelbeil\r Donate link: http://www.codecavalry.com\r Tags: webrtc, video, video chat, webcam, streaming video\r Requires at least: 4.2\r Tested up to: 4.2\r Stable tag: 2.0\r License: GPLv3 or later\r License URI: http://www.gnu.org/licenses/gpl-2.0.html",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/royboy789/wpRTC-Pro.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/royboy789/wpRTC-Pro/issues"
+  },
+  "homepage": "https://github.com/royboy789/wpRTC-Pro",
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.2.0"
+  }
+}

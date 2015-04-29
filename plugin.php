@@ -12,7 +12,6 @@
  */
 
 require_once('includes/settings.php');
-require_once('includes/licensing.php');
 require_once('includes/shortcode.php');
 
 
@@ -25,7 +24,6 @@ class WordPressWebRTC {
 	}
 	
 	function __init() {
-		new pluginLicense();
 		new wprtc_shortcode();
 		new wprtc_setting();
 		add_action( 'admin_enqueue_scripts', array( $this, 'adminSettings' ) );
@@ -35,14 +33,14 @@ class WordPressWebRTC {
 	function adminSettings( $hook_suffix ) {
 	    wp_enqueue_style( 'wp-color-picker' );
 	    wp_enqueue_script('jquery-ui-tabs');
-	    wp_enqueue_script( 'my-script-handle', plugin_dir_url( __FILE__ ).'includes/js/wpRTCadmin.js', array( 'wp-color-picker' ), false, true );
+	    wp_enqueue_script( 'my-script-handle', plugin_dir_url( __FILE__ ).'includes/assets/js/min/wpRTCadmin.min.js', array( 'wp-color-picker' ), false, true );
 
 	    wp_enqueue_style('tab-ui', plugin_dir_url( __FILE__ ).'includes/css/jquery-ui-1.10.4.custom.min.css', null, false);
-	    wp_enqueue_style('wpRTCcss', plugin_dir_url( __FILE__ ).'includes/css/wprtc.css', null, false);
+	    wp_enqueue_style('wpRTCcss', plugin_dir_url( __FILE__ ).'includes/assets/css/wprtc.css', null, false);
 	}
 
 	function wprtcCSS(){
-		wp_enqueue_style('wpRTCcss', plugin_dir_url( __FILE__ ).'includes/css/wprtc.css', null, false);
+		wp_enqueue_style('wpRTCcss', plugin_dir_url( __FILE__ ).'includes/assets/css/wprtc.css', null, false);
 	}
 }
 

@@ -7,9 +7,9 @@ class wprtc_setting {
 	}
 
 	function wprtc_menu() {
-	    add_menu_page( 'wpRTC', 'wpRTC', 'manage_options', 'wp-rtc', 'wprtc_main_options', 'dashicons-admin-generic', 81 );
-	    add_submenu_page( 'wp-rtc', 'wpRTC Settings', 'wpRTC Settings', 'manage_options', 'wp-rtc-settings', 'wprtc_settings_options' );
-	    add_submenu_page( 'wp-rtc', 'wpRTC Styling', 'wpRTC Styling', 'manage_options', 'wp-rtc-css', 'wprtc_css_options' );
+	    add_menu_page( 'wpRTC', 'wpRTC', 'manage_options', 'wp-rtc', array( $this, 'wprtc_main_options' ), 'dashicons-admin-generic', 81 );
+	    add_submenu_page( 'wp-rtc', 'wpRTC Settings', 'wpRTC Settings', 'manage_options', 'wp-rtc-settings', array( $this, 'wprtc_settings_options' ) );
+	    add_submenu_page( 'wp-rtc', 'wpRTC Styling', 'wpRTC Styling', 'manage_options', 'wp-rtc-css', array( $this, 'wprtc_css_options' ) );
 	}
 	
 	
