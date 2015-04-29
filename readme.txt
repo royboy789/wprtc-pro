@@ -8,7 +8,7 @@ Stable tag: 2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-WebRTC for WordPress allows you to easily create a video chat room utilizing webRTC, and is supported by most latest versions of modern browsers.
+WebRTC for WordPress allows you to easily create a video chat room utilizing webRTC, which is supported by most of the latest versions of modern browsers.
 
 == Description ==
   
@@ -29,11 +29,10 @@ Install the plugin and use the simple shortcode `[wpRTC room_name="room"]` to cr
 == Frequently Asked Questions ==
 
 = What is WebRTC? =
-[WebRTC](http://www.webrtc.org) WebRTC is a free, open project that enables web browsers with Real-Time Communications (RTC) capabilities via simple JavaScript APIs. The WebRTC components have been optimized to best serve this purpose.
+[WebRTC](http://www.webrtc.org) WebRTC is a free, open project that enables web browsers with Real-Time Communication (RTC) capabilities via simple JavaScript APIs. The WebRTC components have been optimized to best serve this purpose.
 
 = I installed it, but only see a black screen =
-If you have the plugin isntalled and tried using the shortcode and only see a black screen, make sure you remember to check for permissions from your browser.  
-[Screenshot of permissoin on Chrome](http://roysivan.com/wp-webrtc/videoPermission.png)  
+If you have the plugin installed and tried using the shortcode and only see a black screen, make sure you remember to give your browser permission. Here's a [screenshot of permissions on Chrome](http://roysivan.com/wp-webrtc/videoPermission.png).
 
 
 == Screenshots ==
@@ -46,13 +45,13 @@ If you have the plugin isntalled and tried using the shortcode and only see a bl
 = 2.0 =
 * New webRTC library
 
-= 0.1 =
-* Shortcode and initial build
+= 1.1 =
+* Added Video Mute
   
 = 1.0.1 =
 * Upgrade to version 1
 * Documentation update
 * Settings updates
 
-= 1.1 =
-* Added Video Mute
+= 0.1 =
+* Shortcode and initial build
