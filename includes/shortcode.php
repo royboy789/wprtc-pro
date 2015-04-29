@@ -35,7 +35,8 @@ class wprtc_shortcode {
 		else {
 			$roomName = 'default_room';
 		}
-	
+		
+		// CREATE SELECT FOR CHANGING ROOMS
 		if( strpos( $a['room_name'], ',' ) !== false ) {
 			$rooms = explode(',', $a['room_name']);
 			$select = '<form id="roomChange" method="post"><select name="roomName"><option value="-1" selected="selected">Change Rooms</option>';
@@ -43,7 +44,8 @@ class wprtc_shortcode {
 			$select .= '</select></form>';
 		}
 	
-		if(isset($_POST['roomName'])){ $roomName = $_POST['roomName']; }
+		// SET ROOM BY REQUEST
+		if(isset($_REQUEST['roomName'])){ $roomName = $_REQUEST['roomName']; }
 	
 		
 		// PLUGIN DEFAULTS
@@ -72,16 +74,19 @@ class wprtc_shortcode {
 		
 		if(get_option('rtc_main_private_msg')) { $rtcOptions['private_msg'] = get_option('rtc_main_private_msg'); }
 		
-		if(get_option('rtc_main_private') === '1' && !is_user_logged_in() || $a['privacy'] == 'on' ) { 
+		if( $this->__privacy_check( $a['privacy']) ) { 
 			ob_start();
 			echo '<p>'.$rtcOptions['private_msg'].'</p>';
 			return ob_get_clean();
 		} else {
 			$this->webRTCscripts();
 		}
+		
+		// MAX CAPACITY
 		$maxCap = '';
 		if( intval($a['max_capacity']) > 0 ) { $maxCap = 'data-capacity="'.$a['max_capacity'].'"';}
 		
+		// STYLING
 		$inlineStyle = '<style>';
 			$inlineStyle .= '.rtcVideoContainer { position: relative; height: auto; width: '.$rtcOptions['rtcW'].'; }';
 			$inlineStyle .= 'video.rtcVideoPlayer{ background: '.$rtcOptions['rtcBG'].'; border: '.$rtcOptions['rtcBW'].' solid '.$rtcOptions['rtcBC'].'; height: '.$rtcOptions['rtcH'].'; width: '.$rtcOptions['rtcW'].';}';
@@ -92,14 +97,39 @@ class wprtc_shortcode {
 		
 		// ECHO
 		ob_start();
+		
+		// STYLE OVERRIDES
 		echo $inlineStyle;
+		
+		// ROOM NAME - DEFAULTS TO ON WHEN MULTI ROOM
 		if($a['room_title'] !== '') { echo '<h2 class="videoTitle">'.$a['room_title'].'</h2>'; }
+		if( $a['room_title'] == '' && isset( $select ) ) { echo '<h2 class="videoTitle">'.$roomName.'</h2>'; }
+		
+		// VIDEO CONTAINER
 		echo '<div class="rtcVideoContainer '.$rtcOptions['rtcClass'].'">';
-			echo '<div class="largeVideo"><video autoplay data-room="'.$roomName.'" data-maxCap="'.$a['max_capacity'].'" class="rtcVideoPlayer" id="localVideo" oncontextmenu="return false;" '.$maxCap.'></video></div>';
-			if(isset($select)) { echo $select; }
+			// LOCAL VIDEO
+			echo '<div class="largeVideo">';
+				echo '<video autoplay data-room="'.$roomName.'" data-maxCap="'.$a['max_capacity'].'" class="rtcVideoPlayer" id="localVideo" oncontextmenu="return false;" '.$maxCap.'>';
+				echo '</video>';
+			echo '</div>';
+			// CHANGE ROOM SELECT
+			if(isset($select)) { echo $select; }			
+			// REMOTE VIDEO COLLECTION
 			echo '<div id="remoteVideos"></div>';
+		
 		echo '</div>';
+		
 		return ob_get_clean();
+	}
+	
+	function __privacy_check( $privacy ) {
+		if( is_user_logged_in() ) { return false; }
+		
+		$private = false;
+		if( $privacy == 'on'|| $privacy == 'On' || $privacy == 'ON'  ) { $private = true; }
+		if( get_option('rtc_main_private') === '1' && !is_user_logged_in() ) { $private = true; }
+		
+		return $private;
 	}
 
 }
