@@ -1,5 +1,5 @@
 === wpRTC - WebRTC for WordPress ===
-Contributors: guavaworks
+Contributors: guavaworks, michalbluma, michaelbeil
 Donate link: http://www.codingofficehours.com/coh/#/teacher/23
 Tags: webrtc, video, video chat, webcam
 Requires at least: 3.9
