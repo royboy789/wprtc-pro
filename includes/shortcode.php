@@ -28,10 +28,10 @@ class wprtc_shortcode {
 		), $atts );
 	
 		// ROOM NAME
-		if( strpos( $a['room_name'], ',' ) !== false && !isset($_POST['roomName']) ){
+		if( strpos( $a['room_name'], ',' ) !== false && !isset($_REQUEST['roomName']) ){
 			$rooms = explode(',', $a['room_name']);
 			$roomName = $rooms[0]; 	
-		} elseif($a['room_name'] !== '' && !isset($_POST['roomName'])) { $roomName = $a['room_name']; }
+		} elseif($a['room_name'] !== '' && !isset($_REQUEST['roomName'])) { $roomName = $a['room_name']; }
 		else {
 			$roomName = 'default_room';
 		}
@@ -101,7 +101,7 @@ class wprtc_shortcode {
 		// STYLE OVERRIDES
 		echo $inlineStyle;
 		
-		// ROOM NAME - DEFAULTS TO ON WHEN MULTI ROOM
+		// ROOM TITLE - DEFAULTS TO ROOM NAME UNLESS 'ROOM_TITLE' IS SET
 		if($a['room_title'] !== '') { echo '<h2 class="videoTitle">'.$a['room_title'].'</h2>'; }
 		if( $a['room_title'] == '' && isset( $select ) ) { echo '<h2 class="videoTitle">'.$roomName.'</h2>'; }
 		
