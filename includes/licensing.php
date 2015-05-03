@@ -211,7 +211,7 @@ class pluginLicense {
 			return false;
 	
 		$license_data = json_decode( wp_remote_retrieve_body( $response ) );
-	
+		var_dump( $response );
 		if( !$license_data->license == 'valid' ) {
 			add_action( 'admin_notices', function() {
 				echo '<div class="error"><p><strong>wpRTC is not licensed</strong> you can get your license from the order history page. <a href="/wp-admin/admin.php?page=wp-rtc-license">Activate wpRTC</a> to receive future updates</p></div>';
