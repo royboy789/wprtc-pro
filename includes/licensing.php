@@ -6,7 +6,7 @@ class pluginLicense {
         global $wpdb;
         
         define( 'EDD_SAMPLE_STORE_URL', 'http://roysivan.com' );
-        define( 'EDD_SAMPLE_ITEM_NAME', 'wpRTC PRO - webRTC for WordPress' );
+        define( 'EDD_SAMPLE_ITEM_NAME', __('wpRTC PRO - webRTC for WordPress', 'wprtc') );
 
         add_action( 'admin_init', array( $this, 'licenseActivate' ) );
         add_action( 'admin_init', array( $this, 'licenseDeActivate' ) );
@@ -38,7 +38,7 @@ class pluginLicense {
         $status = get_option( 'wprtc_license_status' );
     ?>
         <div class="wrap">
-            <h2><?php _e('Plugin License Options'); ?></h2>
+            <h2><?php _e('Plugin License Options', 'wprtc'); ?></h2>
             <form method="post">
             
                 <?php settings_fields('wprtc_license'); ?>
@@ -47,32 +47,32 @@ class pluginLicense {
                     <tbody>
                         <tr valign="top">   
                             <th scope="row" valign="top">
-                                <?php _e('License Key'); ?>
+                                <?php _e('License Key', 'wprtc'); ?>
                             </th>
                             <td>
                                 <input id="wprtc_license_key" name="wprtc_license_key" type="text" class="regular-text" value="<?php esc_attr_e( $license ); ?>" />
-                                <label class="description" for="wprtc_license_key"><?php _e('Enter your license key'); ?></label>
+                                <label class="description" for="wprtc_license_key"><?php _e('Enter your license key', 'wprtc'); ?></label>
                             </td>
                         </tr>
                         <?php if( false !== $license ) { ?>
                             <tr valign="top">   
                                 <th scope="row" valign="top">
-                                    <?php _e('Activate License'); ?>
+                                    <?php _e('Activate License', 'wprtc'); ?>
                                     <br/>
                                     <?php if( $status !== false && $status == 'valid' ) { ?>
-                                        <span style="color:green;"><?php _e('Your license is active'); ?></span>
+                                        <span style="color:green;"><?php _e('Your license is active', 'wprtc'); ?></span>
                                     <?php } else { ?>
-                                        <span style="color:red;"><?php _e('Your license is not active, please activate your license'); ?></span>
+                                        <span style="color:red;"><?php _e('Your license is not active, please activate your license', 'wprtc'); ?></span>
                                     <?php } ?>
                                 </th>
                                 <td>
                                     <?php if( $status !== false && $status == 'valid' ) { ?>
                                         <?php wp_nonce_field( 'edd_sample_nonce', 'edd_sample_nonce' ); ?>
                                         <br/>
-                                        <input type="submit" class="button-secondary" name="edd_license_deactivate" value="<?php _e('Deactivate License'); ?>"/>
+                                        <input type="submit" class="button-secondary" name="edd_license_deactivate" value="<?php _e('Deactivate License', 'wprtc'); ?>"/>
                                     <?php } else {
                                         wp_nonce_field( 'edd_sample_nonce', 'edd_sample_nonce' ); ?>
-                                        <input type="submit" class="button-secondary" name="edd_license_activate" value="<?php _e('Activate License'); ?>"/>
+                                        <input type="submit" class="button-secondary" name="edd_license_activate" value="<?php _e('Activate License', 'wprtc'); ?>"/>
                                     <?php } ?>
                                 </td>
                             </tr>
@@ -214,7 +214,13 @@ class pluginLicense {
 		var_dump( $response );
 		if( !$license_data->license == 'valid' ) {
 			add_action( 'admin_notices', function() {
-				echo '<div class="error"><p><strong>wpRTC is not licensed</strong> you can get your license from the order history page. <a href="/wp-admin/admin.php?page=wp-rtc-license">Activate wpRTC</a> to receive future updates</p></div>';
+//				echo '<div class="error"><p><strong>wpRTC is not licensed.</strong> You can get your license from the order history page. <a href="/wp-admin/admin.php?page=wp-rtc-license">Activate wpRTC</a> to receive future updates.</p></div>';
+
+				echo '<div class="error"><p>';
+				printf(__('<strong>wpRTC is not licensed.</strong> You can get your license from the order history page. <a href="%1$s">Activate wpRTC</a> to receive future updates.', 'wprtc'),
+					'/wp-admin/admin.php?page=wp-rtc-license'
+					);
+				echo '</p></div>';
 			} );
 		}
 	}

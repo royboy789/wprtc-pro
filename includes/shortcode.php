@@ -21,9 +21,9 @@ class wprtc_shortcode {
 		
 		// SHORTCODE ATTS
 		$a = shortcode_atts( array(
-			'room_name' => '',
-			'room_title' => '',
-			'privacy' => 'off',
+			'room_name'    => '',
+			'room_title'   => '',
+			'privacy'      => 'off',
 			'max_capacity' => 0
 		), $atts );
 	
@@ -39,7 +39,7 @@ class wprtc_shortcode {
 		// CREATE SELECT FOR CHANGING ROOMS
 		if( strpos( $a['room_name'], ',' ) !== false ) {
 			$rooms = explode(',', $a['room_name']);
-			$select = '<form id="roomChange" method="post"><select name="roomName"><option value="-1" selected="selected">Change Rooms</option>';
+			$select = '<form id="roomChange" method="post"><select name="roomName"><option value="-1" selected="selected">' . __('Change Rooms', 'webrtc') . '</option>';
 				foreach($rooms as $room){ $select .= '<option value="'.$room.'">'.$room.'</option>'; }
 			$select .= '</select></form>';
 		}
@@ -50,15 +50,15 @@ class wprtc_shortcode {
 		
 		// PLUGIN DEFAULTS
 		$rtcOptions = array(
-			'rtcBG' => '#000',
-			'rtcBC' => '#000',
-			'rtcBW' => '2px',
-			'rtcW' => '100%',
-			'rtcH' => '500px',
-			'rtcRH' => '200px',
-			'rtcRvW' => '100px',
-			'private_msg' => 'You must be logged in to view this video stream',
-			'rtcClass' => ''
+			'rtcBG'       => '#000',
+			'rtcBC'       => '#000',
+			'rtcBW'       => '2px',
+			'rtcW'        => '100%',
+			'rtcH'        => '500px',
+			'rtcRH'       => '200px',
+			'rtcRvW'      => '100px',
+			'private_msg' => __( 'You must be logged in to view this video stream', 'webrtc' ),
+			'rtcClass'    => ''
 		);
 		
 		if(get_option('rtcBG')) { $rtcOptions['rtcBG'] = get_option('rtcBG'); }
