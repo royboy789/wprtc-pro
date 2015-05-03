@@ -1,0 +1,292 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: wpRTC Pro - WebRTC for WordPress\n"
+"POT-Creation-Date: 2015-05-03 12:27-0500\n"
+"PO-Revision-Date: 2015-05-03 12:29-0500\n"
+"Last-Translator: Michal Bluma <clients@isotrope.net>\n"
+"Language-Team: Michal Bluma <clients@isotrope.net>\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.6\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: includes/licensing.php:9
+msgid "wpRTC PRO - webRTC for WordPress"
+msgstr ""
+
+#: includes/licensing.php:41
+msgid "Plugin License Options"
+msgstr ""
+
+#: includes/licensing.php:50
+msgid "License Key"
+msgstr ""
+
+#: includes/licensing.php:54
+msgid "Enter your license key"
+msgstr ""
+
+#: includes/licensing.php:60 includes/licensing.php:75
+msgid "Activate License"
+msgstr ""
+
+#: includes/licensing.php:63
+msgid "Your license is active"
+msgstr ""
+
+#: includes/licensing.php:65
+msgid "Your license is not active, please activate your license"
+msgstr ""
+
+#: includes/licensing.php:72
+msgid "Deactivate License"
+msgstr ""
+
+#: includes/licensing.php:220
+#, php-format
+msgid ""
+"<strong>wpRTC is not licensed.</strong> You can get your license from the "
+"order history page. <a href=\"%1$s\">Activate wpRTC</a> to receive future "
+"updates."
+msgstr ""
+
+#: includes/settings.php:11
+msgid "wpRTC Settings"
+msgstr ""
+
+#: includes/settings.php:12
+msgid "wpRTC Styling"
+msgstr ""
+
+#: includes/settings.php:19 includes/settings.php:117
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: includes/settings.php:23 includes/settings.php:78
+msgid "wpRTC - Real Time Video Sharing for WordPress"
+msgstr ""
+
+#: includes/settings.php:27
+msgid "Documentation"
+msgstr ""
+
+#: includes/settings.php:28
+msgid "In depth documentation available online"
+msgstr ""
+
+#: includes/settings.php:29
+msgid "View Documentation"
+msgstr ""
+
+#: includes/settings.php:30
+msgid "Shortcode"
+msgstr ""
+
+#: includes/settings.php:31
+msgid ""
+"The plugin comes with a built in shortcode to help you with setting up your "
+"videos easily"
+msgstr ""
+
+#: includes/settings.php:34
+msgid "Shortcode Attributes"
+msgstr ""
+
+#: includes/settings.php:36
+msgid "title over your video."
+msgstr ""
+
+#: includes/settings.php:37
+msgid "leave blank to remove title."
+msgstr ""
+
+#: includes/settings.php:39
+msgid "set up your room name or multiple rooms."
+msgstr ""
+
+#: includes/settings.php:41
+msgid ""
+"This feature adds in a drop down box under the video so users can change "
+"rooms using the same page and video code. wpRTC PRO"
+msgstr ""
+
+#: includes/settings.php:43
+msgid "override default settings."
+msgstr ""
+
+#: includes/settings.php:44
+msgid "wpRTC PRO"
+msgstr ""
+
+#: includes/settings.php:47
+msgid "wpRTC PRO</h3>"
+msgstr ""
+
+#: includes/settings.php:48
+msgid ""
+"Upgrade to wpRTC PRO to get additional features and future release "
+"functionality"
+msgstr ""
+
+#: includes/settings.php:49
+msgid "dditional Features in wpRTC Pro"
+msgstr ""
+
+#: includes/settings.php:51
+msgid ""
+"<strong>Multiple Rooms</strong> <br/> 1 shortcode, 1 video, multiple rooms"
+msgstr ""
+
+#: includes/settings.php:52
+msgid ""
+"<strong>Privacy Override</strong> <br/> Want all your video streams to be "
+"sign-in only, except a few? The override helps you do just that."
+msgstr ""
+
+#: includes/settings.php:53
+msgid ""
+"<strong>Support</strong> <br/> Preferred support - <a target=\"_blank\" href="
+"\"http://www.roysivan.com/plugin-support\">Plugin Support Page</a>"
+msgstr ""
+
+#: includes/settings.php:55
+msgid "Thank You</strong> - for purchasing wpRTC Pro</h3>"
+msgstr ""
+
+#: includes/settings.php:80
+msgid "Private Videos"
+msgstr ""
+
+#: includes/settings.php:84
+msgid "On"
+msgstr ""
+
+#: includes/settings.php:87
+msgid "Off"
+msgstr ""
+
+#: includes/settings.php:88
+msgid "Turn this option on if you must be logged in to see video"
+msgstr ""
+
+#: includes/settings.php:91
+msgid "Videos are private"
+msgstr ""
+
+#: includes/settings.php:92
+msgid "Message displayed when video privacy is turned on"
+msgstr ""
+
+#: includes/settings.php:94
+msgid "Save Settings"
+msgstr ""
+
+#: includes/settings.php:145
+msgid "Local Video Styling"
+msgstr ""
+
+#: includes/settings.php:146
+msgid "Remote Video Styling"
+msgstr ""
+
+#: includes/settings.php:147 includes/settings.php:172
+msgid "Advanced Styling"
+msgstr ""
+
+#: includes/settings.php:150 includes/settings.php:151
+msgid "Background Color"
+msgstr ""
+
+#: includes/settings.php:152
+msgid "Video Background"
+msgstr ""
+
+#: includes/settings.php:153
+msgid "Video Size"
+msgstr ""
+
+#: includes/settings.php:154
+msgid "Video Width (i.e 500px)"
+msgstr ""
+
+#: includes/settings.php:155 includes/settings.php:169
+msgid "Video Width"
+msgstr ""
+
+#: includes/settings.php:156
+msgid "Video Height  (i.e 500px)"
+msgstr ""
+
+#: includes/settings.php:157
+msgid "Video Height"
+msgstr ""
+
+#: includes/settings.php:158
+msgid "Video Border"
+msgstr ""
+
+#: includes/settings.php:159
+msgid "Video Border Color"
+msgstr ""
+
+#: includes/settings.php:160
+msgid "Border Color"
+msgstr ""
+
+#: includes/settings.php:161
+msgid "Video Border Width (i.e 2px)"
+msgstr ""
+
+#: includes/settings.php:162
+msgid "Border Width"
+msgstr ""
+
+#: includes/settings.php:165
+msgid "Remove Video Styling"
+msgstr ""
+
+#: includes/settings.php:166
+msgid "Remote Video Container Height (i.e 150px)"
+msgstr ""
+
+#: includes/settings.php:167
+msgid "Container Height"
+msgstr ""
+
+#: includes/settings.php:168
+msgid "Remote Video Width (i.e 150px)"
+msgstr ""
+
+#: includes/settings.php:173
+msgid "CSS Class for Video Wrapper"
+msgstr ""
+
+#: includes/settings.php:174
+msgid "CSS class"
+msgstr ""
+
+#: includes/settings.php:175
+msgid ""
+"This will add an additional class to the rtcVideoContainer video wrapper div"
+msgstr ""
+
+#: includes/settings.php:178
+msgid "Save All Styling"
+msgstr ""
+
+#: includes/shortcode.php:42
+msgid "Change Rooms"
+msgstr ""
+
+#: includes/shortcode.php:60
+msgid "You must be logged in to view this video stream"
+msgstr ""

@@ -7,6 +7,7 @@
  * Author:			Roy Sivan
  * Author URI:		http://roysivan.com
  * Text Domain:		wprtc
+ * Domain Path:     /languages
  * License:			GPLv3
  * License URI:		http://www.gnu.org/licenses/gpl.html
  */
@@ -18,6 +19,8 @@ require_once('includes/shortcode.php');
 define('WordPressWebRTC', '2.0'); 
 
 class WordPressWebRTC {
+	const text_domain = 'wprtc';
+
 	function WordPressWebRTC(){
 		global $wpdb;
 		$this->__init();
@@ -26,8 +29,13 @@ class WordPressWebRTC {
 	function __init() {
 		new wprtc_shortcode();
 		new wprtc_setting();
+
+		// Enqueue scripts and styles
 		add_action( 'admin_enqueue_scripts', array( $this, 'adminSettings' ) );
-		add_action('wp_enqueue_scripts' , array( $this, 'wprtcCSS' ) );
+		add_action( 'wp_enqueue_scripts' , array( $this, 'wprtcCSS' ) );
+
+		// Load Translations
+		add_action( 'plugins_loaded', array( $this, 'load_translation' ) );
 	}
 
 	function adminSettings( $hook_suffix ) {
@@ -41,6 +49,10 @@ class WordPressWebRTC {
 
 	function wprtcCSS(){
 		wp_enqueue_style('wpRTCcss', plugin_dir_url( __FILE__ ).'includes/assets/css/wprtc.css', null, false);
+	}
+
+	public function load_translation() {
+		load_plugin_textdomain(self::text_domain, false, dirname( plugin_basename( __FILE__ ) ) . '/languages');
 	}
 }
 
