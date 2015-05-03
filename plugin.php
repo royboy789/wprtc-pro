@@ -4,7 +4,7 @@
  * Plugin URI:		https://wordpress.org/plugins/wprtc-real-time-video-for-wp/
  * Description:		This plugin will allow you to easily create peer-to-peer video chats
  * Version:			2.0
- * Author:			Roy Sivan
+ * Author:			Roy Sivan, Michal Bluma, Michael Beil
  * Author URI:		http://roysivan.com
  * Text Domain:		wprtc
  * Domain Path:     /languages
