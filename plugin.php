@@ -1,14 +1,14 @@
 <?php
 /**
- * Plugin Name:				wpRTC Pro - WebRTC for WordPress
- * Plugin URI:				https://wordpress.org/plugins/wprtc-real-time-video-for-wp/
- * Description:				This plugin will allow you to easily create peer-to-peer video chats
- * Version:						1.1.1
- * Author:						Roy Sivan
- * Author URI:				http://roysivan.com
- * Text Domain:				wprtc
- * License:						GPLv3
- * License URI:				http://www.gnu.org/licenses/gpl.html
+ * Plugin Name:		wpRTC Pro - WebRTC for WordPress
+ * Plugin URI:		https://wordpress.org/plugins/wprtc-real-time-video-for-wp/
+ * Description:		This plugin will allow you to easily create peer-to-peer video chats
+ * Version:			2.0
+ * Author:			Roy Sivan
+ * Author URI:		http://roysivan.com
+ * Text Domain:		wprtc
+ * License:			GPLv3
+ * License URI:		http://www.gnu.org/licenses/gpl.html
  */
 
 require_once('includes/settings.php');
