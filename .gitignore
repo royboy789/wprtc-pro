@@ -1,5 +1,8 @@
-node_modules/
+# System files
 .DS_Store
+
+# Node
+node_modules/
 npm-debug.log
 
 # PhpStorm files

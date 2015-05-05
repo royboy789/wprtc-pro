@@ -16,7 +16,7 @@ require_once('includes/settings.php');
 require_once('includes/shortcode.php');
 
 
-define('WordPressWebRTC', '2.0'); 
+define('WordPressWebRTC', '2.0');
 
 class WordPressWebRTC {
 	const text_domain = 'wprtc';
@@ -25,7 +25,7 @@ class WordPressWebRTC {
 		global $wpdb;
 		$this->__init();
 	}
-	
+
 	function __init() {
 		new wprtc_shortcode();
 		new wprtc_setting();
