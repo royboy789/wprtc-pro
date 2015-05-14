@@ -2,10 +2,19 @@
 
 class wprtc_setting {
 	
-	function __construct() {
+	function init() {
 		add_action( 'admin_menu', array( $this, 'wprtc_menu' ) );
+		add_action( 'admin_init', array( $this, 'wprtc_posthandler' ) );
 	}
-
+	
+	function wprtc_posthandler() {
+		
+		if( isset( $_POST['_wprt_icecomm_save'] ) ) {
+			update_option( 'wprtc_icecomm', $_POST['_wprtc_icecomm'] );
+		}
+		
+	}
+	
 	function wprtc_menu() {
 	    add_menu_page( 'wpRTC', 'wpRTC', 'manage_options', 'wp-rtc', array( $this, 'wprtc_main_options' ), 'dashicons-admin-generic', 81 );
 	    add_submenu_page( 'wp-rtc', __('wpRTC Settings', 'wprtc'), __('wpRTC Settings', 'wprtc'), 'manage_options', 'wp-rtc-settings', array( $this, 'wprtc_settings_options' ) );
@@ -18,15 +27,31 @@ class wprtc_setting {
 	    if ( !current_user_can( 'manage_options' ) )  {
 	        wp_die( __( 'You do not have sufficient permissions to access this page.', 'wprtc' ) );
 	    }
+	    
+	    $wprtc_icecomm = get_option( 'wprtc_icecomm', '' );
+	    
 	    echo '<style> .feature-filter { padding: 20px; } strong { font-weight: bold; }</style>';
 	    echo '<div class="wrap feature-filter">';
 	        echo '<h1>' . __('wpRTC - Real Time Video Sharing for WordPress', 'wprtc') . '</h1>';
 	        echo '<table width="100%" cellpadding="5" cellspacing="5" border="0">';
 	            echo '<tr>';
 					echo '<td width="50%" valign="top">';
-	                	echo '<h3>' . __('Documentation', 'wprtc' ). '</h3>';
-	                	echo '<p>' . __('In depth documentation available online', 'wprtc') . '<br/>';
-	                	echo '<a class="button-primary" href="http://www.roysivan.com/wp-webrtc" target="_blank">' . __('View Documentation', 'wprtc') . '</a></p>';
+	                	echo '<h2>' . __('ICECOMM API', 'wprct') . '</h2>';
+	                	echo '<p> wpRTC is now powered by <a target="_blank" href="http://icecomm.io">Icecomm.io</a> a cross browser WebRTC library.';
+	                	echo '<br />You will need to setup a FREE account on <a target="_blank" href="http://icecomm.io">Icecomm.io</a> to get an API key to use this plugin</p>';
+	                	
+	                	echo '<form method="post">';
+	                	
+	                		echo '<table cellpadding="5" cellspacing="0" border="0">';
+	                			echo '<tr>';
+	                				echo '<th valign="top"><label for="_wprtc_icecomm">Icecomm.io API Key</label></th>';
+	                				echo '<td><input id="_wprtc_icecomm" name="_wprtc_icecomm" value="' . $wprtc_icecomm . '" style="display:block;width:100%" />';
+	                				echo '<p class="description">You can find your API key on your account page once you have registered</p>';
+	                				echo '</td>';
+	                			echo '</tr>';
+	                		echo '</table>';
+							echo '<input class="button-primary" type="submit" value="Save API Key" name="_wprt_icecomm_save" />';
+	                	echo '</form>';
 	                    echo '<h3>' . __('Shortcode', 'wprtc') . '</h3>';
 	                    echo '<p>' . __('The plugin comes with a built in shortcode to help you with setting up your videos easily', 'wprtc') . '</p>';
 	                    echo '<pre><code>[wpRTC]</code></pre>';
@@ -38,12 +63,15 @@ class wprtc_setting {
 	                    // room_name
 	                    echo '<p><strong>room_name</strong> - ' . __('set up your room name or multiple rooms.', 'wprtc');
 						echo '<p><code>[wpRTC room_name="testing"]</code> </p>';
-	                    echo '<p><code>[wpRTC room_name="testing, testingAgain, anotherRoom"]</code> - <em>' . __('This feature adds in a drop down box under the video so users can change rooms using the same page and video code. wpRTC PRO', 'wprtc') . '</em></p>';
+	                    echo '<p><code>[wpRTC room_name="testing, testingAgain, anotherRoom"]</code> <br/><em>' . __('This feature adds in a drop down box under the video so users can change rooms using the same page and video code. wpRTC PRO', 'wprtc') . '</em></p>';
 	                    // privacy
 	                    echo '<p><strong>privacy</strong> - ' . __('override default settings.', 'wprtc') . '<br/>';
 	                    echo '<code>[wpRTC privacy="on"]</code> - <em>' . __('wpRTC PRO', 'wprtc') . '</em></p>';
 	                echo '</td>';
 	                echo '<td valign="top">';
+	                	echo '<h3>' . __('Documentation', 'wprtc' ). '</h3>';
+	                	echo '<p>' . __('In depth documentation available online', 'wprtc') . '<br/>';
+	                	echo '<a class="button-primary" href="http://www.roysivan.com/wp-webrtc" target="_blank">' . __('View Documentation', 'wprtc') . '</a></p>';
 	                    echo '<h3>' . __('wpRTC PRO</h3>', 'wprtc');
 	                    echo '<p>' . __('Upgrade to wpRTC PRO to get additional features and future release functionality', 'wprtc') . '</p>';
 	                    echo '<h4>A' . __('dditional Features in wpRTC Pro', 'wprtc') . '</h4>';

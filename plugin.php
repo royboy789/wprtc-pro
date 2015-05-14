@@ -28,7 +28,8 @@ class WordPressWebRTC {
 
 	function __init() {
 		new wprtc_shortcode();
-		new wprtc_setting();
+		$wprtc_settings = new wprtc_setting();
+		$wprtc_settings->init();
 
 		// Enqueue scripts and styles
 		add_action( 'admin_enqueue_scripts', array( $this, 'adminSettings' ) );
