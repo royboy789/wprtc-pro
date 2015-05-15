@@ -1,9 +1,9 @@
 var $ = jQuery,
-room = $('#localVideo').data('room'),
+room = $('.localVideo').data('room'),
 localSrc = '',
 wprtc_comm;
 maxCap = 15;
-if(!!$('#localVideo').data('capacity')) { maxCap = $('#localVideo').data('capacity'); }
+if(!!$('.localVideo').data('capacity')) { maxCap = $('.localVideo').data('capacity'); }
 
 $(document).ready(function($){
 	
@@ -12,7 +12,7 @@ $(document).ready(function($){
 		return false;
 	}
 	
-	wprtc_comm = new Icecomm('wprtc_info.wprtc_icecomm', {debug: false});
+	wprtc_comm = new Icecomm(wprtc_info.wprtc_icecomm, {debug: false});
 	
 	wprtc_comm.connect( room, {
 		audio: true,
@@ -30,7 +30,8 @@ $(document).ready(function($){
 	wprtc_comm.on('local', function(peer) {
 		console.log('Joining Room (Local)');
 		console.log( wprtc_comm.getRooms(), wprtc_comm.getRoomSize(), wprtc_comm.getRemoteIDs() );
-		document.getElementById('localVideo').src = peer.stream;
+		$('.localVideo').get(0).src = peer.stream;
+		$('.localVideo').attr('id', peer.id );
 	});
 	
 	wprtc_comm.on('disconnect', function(peer) {
@@ -52,16 +53,49 @@ $(document).ready(function($){
 	
 	/** REMOTE VIDEO BEHAVIOR **/
 	$('body').on('click', '#remoteVideos video', function(e) {
+		$('.mute_controls a').hide();
 		var remote_src = $(this).attr('src'),
 		remote_id = $(this).attr('id'),
-		local_src = $('#localVideo').attr('src');
+		local_src = $('.localVideo').attr('src');
 		
-		$('#localVideo').attr('src', remote_src);
-		$('#localVideo').get(0).play();
+		$('.localVideo').attr('src', remote_src);
+		$('.localVideo').get(0).play();
 		
 		$(this).attr('src', local_src);
 		document.getElementById( remote_id ).play();
 	});
+	
+	/** MUTE **/
+	$('body').on('click', '.mute', function(e){
+		e.preventDefault();
+		
+		var local = $('.localVideo').get(0);
+		if( $(this).hasClass('audio') ) {
+			$(this).children('span.fa').toggleClass('fa-microphone').toggleClass('fa-microphone-slash');
+			console.log( wprtc_comm.getLocalID() );
+			if( local.muted ) {
+				local.muted = false;
+			} else {
+				local.muted = true;
+			}
+		} else {
+			if( $(this).children('span.fa').hasClass('on') ) {
+				wprtc_comm.close();
+			} else {
+				wprtc_comm.connect( room, {
+					audio: local.muted,
+					limit: parseInt( maxCap )
+				}, function(){
+					console.log('reconnected to: ' + room);
+				});
+			}
+			
+			$(this).children('span.fa').toggleClass('on').toggleClass('off');
+			
+			
+		}
+		
+	})
 	
 	
 })

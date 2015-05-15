@@ -109,13 +109,18 @@ class wprtc_shortcode {
 		
 		// ROOM TITLE - DEFAULTS TO ROOM NAME UNLESS 'ROOM_TITLE' IS SET
 		if($a['room_title'] !== '') { echo '<h2 class="videoTitle">'.$a['room_title'].'</h2>'; }
-		if( $a['room_title'] == '' && isset( $select ) ) { echo '<h2 class="videoTitle">'.$roomName.'</h2>'; }
+		if( $a['room_title'] == '' && isset( $select ) ) { echo '<h2 class="videoTitle">'.$roomName.'</h2>'; }		
 		
 		// VIDEO CONTAINER
 		echo '<div class="rtcVideoContainer '.$rtcOptions['rtcClass'].'">';
+			// MUTE CONTROLES
+			echo '<div class="mute_controls">';
+				echo '<a href="#" class="mute audio" title="mute audio"><span class="fa fa-microphone"></span></a>';
+				echo '<a href="#" class="mute video" title="mute video"><span class="fa fa-power-off on"></span></a>';
+			echo '</div>';
 			// LOCAL VIDEO
 			echo '<div class="largeVideo">';
-				echo '<video autoplay data-room="'.$roomName.'" data-maxCap="'.$a['max_capacity'].'" class="rtcVideoPlayer" id="localVideo" oncontextmenu="return false;" '.$maxCap.'>';
+				echo '<video autoplay data-room="'.$roomName.'" data-maxCap="'.$a['max_capacity'].'" class="rtcVideoPlayer localVideo" oncontextmenu="return false;" '.$maxCap.'>';
 				echo '</video>';
 			echo '</div>';
 			// CHANGE ROOM SELECT
