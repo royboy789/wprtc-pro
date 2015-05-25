@@ -23,7 +23,6 @@ class WordPressWebRTC {
 
 	function WordPressWebRTC(){
 		global $wpdb;
-		$this->__init();
 	}
 
 	function __init() {
@@ -44,7 +43,7 @@ class WordPressWebRTC {
 	    wp_enqueue_script('jquery-ui-tabs');
 	    wp_enqueue_script( 'my-script-handle', plugin_dir_url( __FILE__ ).'includes/assets/js/min/wpRTCadmin.min.js', array( 'wp-color-picker' ), false, true );
 
-	    wp_enqueue_style('tab-ui', plugin_dir_url( __FILE__ ).'includes/css/jquery-ui-1.10.4.custom.min.css', null, false);
+	    wp_enqueue_style('tab-ui', plugin_dir_url( __FILE__ ).'includes/assets/css/jquery-ui-1.10.4.custom.min.css', null, false);
 	    wp_enqueue_style('wpRTCcss', plugin_dir_url( __FILE__ ).'includes/assets/css/wprtc.css', null, false);
 	}
 
@@ -57,5 +56,7 @@ class WordPressWebRTC {
 	}
 }
 
-new WordPressWebRTC();
+$wp_rtc = new WordPressWebRTC();
+$wp_rtc->__init();
+
 ?>
