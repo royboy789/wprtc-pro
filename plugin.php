@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name:		wpRTC Pro - WebRTC for WordPress
+ * Plugin Name:		wpRTC - WebRTC for WordPress
  * Plugin URI:		https://wordpress.org/plugins/wprtc-real-time-video-for-wp/
  * Description:		This plugin will allow you to easily create peer-to-peer video chats
- * Version:			2.0
+ * Version:			2.0.0
  * Author:			Roy Sivan, Michal Bluma, Michael Beil
  * Author URI:		http://roysivan.com
  * Text Domain:		wprtc
@@ -16,7 +16,7 @@ require_once('includes/settings.php');
 require_once('includes/shortcode.php');
 
 
-define('WordPressWebRTC', '2.0');
+define('WordPressWebRTC', '2.0.0');
 
 class WordPressWebRTC {
 	const text_domain = 'wprtc';

@@ -22,6 +22,25 @@ gulp.task('scss', function() {
 gulp.task('watch', function(){
 	gulp.watch('includes/assets/scss/*.scss', ['scss']);
 	gulp.watch('includes/assetsjs/*.js', ['js']);
-})
+});
+
+gulp.task('plugin_build', function() {
+	
+	gulp.src('*.php')
+		.pipe(gulp.dest('plugin_build/'));
+	
+	gulp.src('includes/**/*.php')
+		.pipe(gulp.dest('plugin_build/includes'));
+	
+	gulp.src('includes/assets/css/**/*.css')
+		.pipe(gulp.dest('plugin_build/includes/assets/css/'));
+		
+	gulp.src('includes/assets/js/min/*.js')
+		.pipe(gulp.dest('plugin_build/includes/assets/js/min/'));
+	
+	gulp.src('languages/*')
+		.pipe(gulp.dest('plugin_build/languages'));
+	
+});
 
 gulp.task('default', ['js', 'scss']);

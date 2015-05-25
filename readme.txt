@@ -4,9 +4,9 @@ Donate link: http://www.codingofficehours.com/coh/#/teacher/23
 Tags: webrtc, video, video chat, webcam
 Requires at least: 3.9
 Tested up to: 4.2.1
-Stable tag: 2.0
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Stable tag: 2.0.0
+License: GPLv3 or later
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 WebRTC for WordPress allows you to easily create a video chat room utilizing webRTC, which is supported by most of the latest versions of modern browsers.
 

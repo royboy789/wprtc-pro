@@ -9,8 +9,8 @@ class wprtc_shortcode {
 
 	function webRTCscripts() {
 		// Simple WebRTC Core
-		wp_enqueue_script('icecomm-core', plugin_dir_url( __FILE__ ).'assets/js/icecomm.js', array('jquery'), null, false);
-		wp_enqueue_script('wpRTC', plugin_dir_url( __FILE__ ).'assets/js/wpRTC.js', array('icecomm-core'), null, false);
+		wp_enqueue_script('icecomm-core', plugin_dir_url( __FILE__ ).'assets/js/min/icecomm.min.js', array('jquery'), null, false);
+		wp_enqueue_script('wpRTC', plugin_dir_url( __FILE__ ).'assets/js/min/wpRTC.min.js', array('icecomm-core'), null, false);
 		wp_localize_script( 'wpRTC', 
 			'wprtc_info',
 			$wprtc = array(
@@ -29,7 +29,6 @@ class wprtc_shortcode {
 		$a = shortcode_atts( array(
 			'room_name'    => '',
 			'room_title'   => '',
-			'privacy'      => 'off',
 			'max_capacity' => 0
 		), $atts );
 	
@@ -37,17 +36,10 @@ class wprtc_shortcode {
 		if( strpos( $a['room_name'], ',' ) !== false && !isset($_REQUEST['roomName']) ){
 			$rooms = explode(',', $a['room_name']);
 			$roomName = $rooms[0]; 	
-		} elseif($a['room_name'] !== '' && !isset($_REQUEST['roomName'])) { $roomName = $a['room_name']; }
-		else {
+		} elseif( $a['room_name'] !== '' && !isset($_REQUEST['roomName']) ) { 
+			$roomName = $a['room_name']; 
+		} else {
 			$roomName = 'default_room';
-		}
-		
-		// CREATE SELECT FOR CHANGING ROOMS
-		if( strpos( $a['room_name'], ',' ) !== false ) {
-			$rooms = explode(',', $a['room_name']);
-			$select = '<form id="roomChange" method="post"><select name="roomName"><option value="-1" selected="selected">' . __('Change Rooms', 'webrtc') . '</option>';
-				foreach($rooms as $room){ $select .= '<option value="'.$room.'">'.$room.'</option>'; }
-			$select .= '</select></form>';
 		}
 	
 		// SET ROOM BY REQUEST
@@ -80,7 +72,7 @@ class wprtc_shortcode {
 		
 		if(get_option('rtc_main_private_msg')) { $rtcOptions['private_msg'] = get_option('rtc_main_private_msg'); }
 		
-		if( $this->__privacy_check( $a['privacy']) ) { 
+		if( $this->__privacy_check() ) { 
 			ob_start();
 			echo '<p>'.$rtcOptions['private_msg'].'</p>';
 			return ob_get_clean();
@@ -133,7 +125,7 @@ class wprtc_shortcode {
 		return ob_get_clean();
 	}
 	
-	function __privacy_check( $privacy ) {
+	function __privacy_check( $privacy = 'off' ) {
 		if( is_user_logged_in() ) { return false; }
 		
 		$private = false;
