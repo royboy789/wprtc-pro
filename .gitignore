@@ -7,3 +7,5 @@ npm-debug.log
 
 # PhpStorm files
 .idea/
+plugin_build/*
+icons/*
