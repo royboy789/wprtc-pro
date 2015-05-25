@@ -14,6 +14,7 @@
 
 require_once('includes/settings.php');
 require_once('includes/shortcode.php');
+require_once('includes/licensing.php');
 
 
 define('WordPressWebRTC', '2.0.0');
@@ -29,6 +30,9 @@ class WordPressWebRTC {
 		new wprtc_shortcode();
 		$wprtc_settings = new wprtc_setting();
 		$wprtc_settings->init();
+		
+		$wprtc_license = new wprtc_license();
+		$wprtc_license->init();
 
 		// Enqueue scripts and styles
 		add_action( 'admin_enqueue_scripts', array( $this, 'adminSettings' ) );
