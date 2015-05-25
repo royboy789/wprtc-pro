@@ -1,0 +1,23 @@
+.rtcVideoContainer {
+  display: block; }
+  .rtcVideoContainer .mute_controls {
+    text-align: center; }
+    .rtcVideoContainer .mute_controls a {
+      border: none;
+      display: inline-block;
+      font-size: 1.5em;
+      margin: 0 10px;
+      text-decoration: none; }
+      .rtcVideoContainer .mute_controls a span {
+        color: green; }
+        .rtcVideoContainer .mute_controls a span.fa-microphone-slash,
+        .rtcVideoContainer .mute_controls a span.off {
+          color: red; }
+
+#remoteVideos video {
+  cursor: pointer; }
+
+form#roomChange select {
+  cursor: pointer;
+  padding: 5px 0;
+  width: 100%; }

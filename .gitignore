@@ -1,2 +1,9 @@
-## PhpStorm project files
+# System files
+.DS_Store
+
+# Node
+node_modules/
+npm-debug.log
+
+# PhpStorm files
 .idea/
