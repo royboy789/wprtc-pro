@@ -9,8 +9,8 @@ class wprtc_shortcode {
 
 	function webRTCscripts() {
 		// Simple WebRTC Core
-		wp_enqueue_script('icecomm-core', plugin_dir_url( __FILE__ ).'assets/js/icecomm.js', array('jquery'), null, false);
-		wp_enqueue_script('wpRTC', plugin_dir_url( __FILE__ ).'assets/js/wpRTC.js', array('icecomm-core'), null, false);
+		wp_enqueue_script('icecomm-core', plugin_dir_url( __FILE__ ).'assets/js/min/icecomm.min.js', array('jquery'), null, false);
+		wp_enqueue_script('wpRTC', plugin_dir_url( __FILE__ ).'assets/js/min/wpRTC.min.js', array('icecomm-core'), null, false);
 		wp_localize_script( 'wpRTC', 
 			'wprtc_info',
 			$wprtc = array(
