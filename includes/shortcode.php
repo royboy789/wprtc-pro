@@ -11,6 +11,8 @@ class wprtc_shortcode {
 		// Simple WebRTC Core
 		wp_enqueue_script('icecomm-core', plugin_dir_url( __FILE__ ).'assets/js/min/icecomm.min.js', array('jquery'), null, false);
 		wp_enqueue_script('wpRTC', plugin_dir_url( __FILE__ ).'assets/js/min/wpRTC.min.js', array('icecomm-core'), null, false);
+		//wp_enqueue_script('wpRTC', plugin_dir_url( __FILE__ ).'assets/js/wpRTC.js', array('icecomm-core'), null, false);
+		
 		wp_localize_script( 'wpRTC', 
 			'wprtc_info',
 			$wprtc = array(
@@ -28,9 +30,11 @@ class wprtc_shortcode {
 		$wprtc_video = array();
 		// SHORTCODE ATTS
 		$wprtc_video['shortcode_options'] = shortcode_atts( array(
-			'room_name'    => '',
-			'privacy'      => 'off',
-			'max_capacity' => 0
+			'room_name'    		 => '',
+			'privacy'      		 => 'off',
+			'default_room' 		 => '',
+			'default_room_enter' => '',
+			'max_capacity' 		 => 0
 		), $atts );
 	
 		// ROOM NAME
@@ -103,6 +107,7 @@ class wprtc_shortcode {
 		echo $inlineStyle;
 		
 		// TEMPLATE
+		
 		include( $this->get_template() );
 				
 		return ob_get_clean();
@@ -133,6 +138,10 @@ class wprtc_shortcode {
 		// SET ROOM BY REQUEST
 		if(isset($_REQUEST['roomName'])){ 
 			return $_REQUEST['roomName'];			
+		}
+		
+		if( strpos( $a['room_name'], ',' ) !== false && isset( $a['default_room'] ) ) {
+			return $a['default_room'];
 		}
 		
 		

@@ -6,20 +6,27 @@ maxCap = 15;
 if(!!$('.localVideo').data('capacity')) { maxCap = $('.localVideo').data('capacity'); }
 
 $(document).ready(function($){
-
+	
 	if( !wprtc_info.wprtc_icecomm ) {
 		alert('No API Key setup, please go to your admin settings to put in the Icecomm.io API key' );
 		return false;
 	}
-	console.log( wprtc_info.wprtc_icecomm );
+
 	wprtc_comm = new Icecomm(wprtc_info.wprtc_icecomm, {debug: true});
 	
-	wprtc_comm.connect( room, {
-		audio: true,
-		limit: parseInt( maxCap )
-	}, function(){
-		console.log('connected to: ' + room);
-	});
+	room = room.trim();
+	
+	if( room == 'none' ) {
+		$('#wprtc_splash').show();
+	} else {
+		$('.rtcVideoContainer').show();
+		wprtc_comm.connect( room, {
+			audio: true,
+			limit: parseInt( maxCap )
+		}, function(){
+			console.log('connected to: ' + room);
+		});
+	}
 	
 	wprtc_comm.on('connected', function(peer) {
 		console.log('Joining Room (Remote)');
@@ -93,7 +100,26 @@ $(document).ready(function($){
 			$(this).children('span.fa').toggleClass('on').toggleClass('off');
 			
 			
+		}		
+	})
+	
+	/** START CHAT WHEN default_room = NONE **/
+	$('body').on('click', '#startChat', function(e){
+		e.preventDefault();
+		var enter_room = $(this).data('room');
+		
+		$('#wprtc_splash').hide();
+		$('.rtcVideoContainer').show();
+		
+		if( $('.videoTitle').length ) {
+			$('.videoTitle').html( enter_room );
 		}
+		
+		wprtc_comm.connect( enter_room, {
+			limit: parseInt( maxCap )
+		}, function(){
+			console.log('connected to: ' + enter_room );
+		});
 		
 	})
 	
