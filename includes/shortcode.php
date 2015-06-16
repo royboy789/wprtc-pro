@@ -18,40 +18,32 @@ class wprtc_shortcode {
 			)
 		);
 		
-		// FONT AWEOMSE
+		// FONT AWESOME
 		wp_enqueue_style('fontAwesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css', null, false);
 		
 	}
 	
 	function webRTCsc( $atts ){
 		
+		$wprtc_video = array();
 		// SHORTCODE ATTS
-		$a = shortcode_atts( array(
+		$wprtc_video['shortcode_options'] = shortcode_atts( array(
 			'room_name'    => '',
-			'room_title'   => '',
 			'privacy'      => 'off',
 			'max_capacity' => 0
 		), $atts );
 	
 		// ROOM NAME
-		if( strpos( $a['room_name'], ',' ) !== false && !isset($_REQUEST['roomName']) ){
-			$rooms = explode(',', $a['room_name']);
-			$roomName = $rooms[0]; 	
-		} elseif($a['room_name'] !== '' && !isset($_REQUEST['roomName'])) { $roomName = $a['room_name']; }
-		else {
-			$roomName = 'default_room';
-		}
+		$wprtc_video['room_name'] = $this->room_name( $wprtc_video['shortcode_options'] );
 		
 		// CREATE SELECT FOR CHANGING ROOMS
-		if( strpos( $a['room_name'], ',' ) !== false ) {
-			$rooms = explode(',', $a['room_name']);
-			$select = '<form id="roomChange" method="post"><select name="roomName"><option value="-1" selected="selected">' . __('Change Rooms', 'webrtc') . '</option>';
-				foreach($rooms as $room){ $select .= '<option value="'.$room.'">'.$room.'</option>'; }
-			$select .= '</select></form>';
+		$room_name_default = $wprtc_video['shortcode_options']['room_name'];
+		if( strpos( $room_name_default, ',' ) !== false ) {
+			$rooms = explode(',', $room_name_default );
+			$wprtc_video['room_select'] = '<form id="roomChange" method="post"><select name="roomName"><option value="-1" selected="selected">' . __('Change Rooms', 'webrtc') . '</option>';
+				foreach($rooms as $room){ $wprtc_video['room_select'] .= '<option value="'.$room.'">'.$room.'</option>'; }
+			$wprtc_video['room_select'] .= '</select></form>';
 		}
-	
-		// SET ROOM BY REQUEST
-		if(isset($_REQUEST['roomName'])){ $roomName = $_REQUEST['roomName']; }
 	
 		
 		// PLUGIN DEFAULTS
@@ -64,7 +56,6 @@ class wprtc_shortcode {
 			'rtcRH'       => '200px',
 			'rtcRvW'      => '100px',
 			'private_msg' => __( 'You must be logged in to view this video stream', 'webrtc' ),
-			'rtcClass'    => ''
 		);
 		
 		if(get_option('rtcBG')) { $rtcOptions['rtcBG'] = get_option('rtcBG'); }
@@ -75,12 +66,14 @@ class wprtc_shortcode {
 	
 		if(get_option('rtcRH')) { $rtcOptions['rtcRH'] = get_option('rtcRH'); }
 		if(get_option('rtcRvW')) { $rtcOptions['rtcRvW'] = get_option('rtcRvW'); }
-	
-		if(get_option('rtcClass')) { $rtcOptions['rtcClass'] = get_option('rtcClass'); }
-		
+				
 		if(get_option('rtc_main_private_msg')) { $rtcOptions['private_msg'] = get_option('rtc_main_private_msg'); }
 		
-		if( $this->__privacy_check( $a['privacy']) ) { 
+		// WRAPPER CLASS
+		$wprtc_video['wrapper_class'] = '';
+		if(get_option('rtcClass')) { $wprtc_video['wrapper_class'] = get_option('rtcClass'); }
+		
+		if( $this->__privacy_check( $wprtc_video['shortcode_options']['privacy']) ) { 
 			ob_start();
 			echo '<p>'.$rtcOptions['private_msg'].'</p>';
 			return ob_get_clean();
@@ -89,8 +82,10 @@ class wprtc_shortcode {
 		}
 		
 		// MAX CAPACITY
-		$maxCap = '';
-		if( intval($a['max_capacity']) > 0 ) { $maxCap = 'data-capacity="'.$a['max_capacity'].'"';}
+		$wprtc_video['max_capacity'] = '';
+		if( intval( $wprtc_video['shortcode_options']['max_capacity'] ) > 0 ) { 
+			$wprtc_video['max_capacity'] = 'data-capacity="'.$wprtc_video['shortcode_options']['max_capacity'].'"';
+		}
 		
 		// STYLING
 		$inlineStyle = '<style>';
@@ -107,29 +102,9 @@ class wprtc_shortcode {
 		// STYLE OVERRIDES
 		echo $inlineStyle;
 		
-		// ROOM TITLE - DEFAULTS TO ROOM NAME UNLESS 'ROOM_TITLE' IS SET
-		if($a['room_title'] !== '') { echo '<h2 class="videoTitle">'.$a['room_title'].'</h2>'; }
-		if( $a['room_title'] == '' && isset( $select ) ) { echo '<h2 class="videoTitle">'.$roomName.'</h2>'; }		
-		
-		// VIDEO CONTAINER
-		echo '<div class="rtcVideoContainer '.$rtcOptions['rtcClass'].'">';
-			// MUTE CONTROLES
-			echo '<div class="mute_controls">';
-				echo '<a href="#" class="mute audio" title="mute audio"><span class="fa fa-microphone"></span></a>';
-				echo '<a href="#" class="mute video" title="mute video"><span class="fa fa-power-off on"></span></a>';
-			echo '</div>';
-			// LOCAL VIDEO
-			echo '<div class="largeVideo">';
-				echo '<video autoplay data-room="'.$roomName.'" data-maxCap="'.$a['max_capacity'].'" class="rtcVideoPlayer localVideo" oncontextmenu="return false;" '.$maxCap.'>';
-				echo '</video>';
-			echo '</div>';
-			// CHANGE ROOM SELECT
-			if(isset($select)) { echo $select; }			
-			// REMOTE VIDEO COLLECTION
-			echo '<div id="remoteVideos"></div>';
-		
-		echo '</div>';
-		
+		// TEMPLATE
+		include( $this->get_template() );
+				
 		return ob_get_clean();
 	}
 	
@@ -141,6 +116,36 @@ class wprtc_shortcode {
 		if( get_option('rtc_main_private') === '1' && !is_user_logged_in() ) { $private = true; }
 		
 		return $private;
+	}
+	
+	public function get_template() {
+		
+		if( file_exists( get_stylesheet_directory() .  '/video-template.php' ) ) {
+			return get_stylesheet_directory() .  '/video-template.php';
+		} else {
+			return WPWebRTCPath . 'video-template.php';
+		}
+		
+	}
+	
+	public function room_name( $a ) {
+		
+		// SET ROOM BY REQUEST
+		if(isset($_REQUEST['roomName'])){ 
+			return $_REQUEST['roomName'];			
+		}
+		
+		
+		if( strpos( $a['room_name'], ',' ) !== false && !isset($_REQUEST['roomName']) ){
+			$rooms = explode(',', $a['room_name']);
+			return $rooms[0]; 	
+		} elseif($a['room_name'] !== '' && !isset($_REQUEST['roomName'])) {
+			return $a['room_name']; 
+		}
+		else {
+			return 'default_room';
+		}
+		
 	}
 
 }

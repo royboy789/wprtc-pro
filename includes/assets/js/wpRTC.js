@@ -6,13 +6,13 @@ maxCap = 15;
 if(!!$('.localVideo').data('capacity')) { maxCap = $('.localVideo').data('capacity'); }
 
 $(document).ready(function($){
-	
+
 	if( !wprtc_info.wprtc_icecomm ) {
 		alert('No API Key setup, please go to your admin settings to put in the Icecomm.io API key' );
 		return false;
 	}
-	
-	wprtc_comm = new Icecomm(wprtc_info.wprtc_icecomm, {debug: false});
+	console.log( wprtc_info.wprtc_icecomm );
+	wprtc_comm = new Icecomm(wprtc_info.wprtc_icecomm, {debug: true});
 	
 	wprtc_comm.connect( room, {
 		audio: true,

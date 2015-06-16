@@ -18,6 +18,7 @@ require_once('includes/licensing.php');
 
 
 define('WordPressWebRTC', '2.0.1');
+define('WPWebRTCPath', plugin_dir_path( __FILE__ ) );
 
 class WordPressWebRTC {
 	const text_domain = 'wprtc';
